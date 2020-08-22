@@ -1,0 +1,494 @@
+{
+
+"Геленджик": "https://www.domofond.ru/city-ratings/gelendzhik-c923",
+
+"Дубна": "https://www.domofond.ru/city-ratings/dubna-c3431",
+
+"Грозный": "https://www.domofond.ru/city-ratings/groznyy-c47",
+
+"Тюмень": "https://www.domofond.ru/city-ratings/tyumen-c2547",
+
+"Гурьевск": "https://www.domofond.ru/city-ratings/gurevsk-c2895",
+
+"Анапа": "https://www.domofond.ru/city-ratings/anapa-c912",
+
+"Сургут": "https://www.domofond.ru/city-ratings/surgut-c2254",
+
+"Нижневартовск": "https://www.domofond.ru/city-ratings/nizhnevartovsk-c2289",
+
+"Ейск": "https://www.domofond.ru/city-ratings/eysk-c899",
+
+"Москва": "https://www.domofond.ru/city-ratings/moskva-c3584",
+
+"Октябрьский": "https://www.domofond.ru/city-ratings/oktyabrskiy-c1565",
+
+"Сочи": "https://www.domofond.ru/city-ratings/sochi-c909",
+
+"Майкоп": "https://www.domofond.ru/city-ratings/maykop-c1368",
+
+"Белореченск": "https://www.domofond.ru/city-ratings/belorechensk-c720",
+
+"Домодедово": "https://www.domofond.ru/city-ratings/domodedovo-c3521",
+
+"Ставрополь": "https://www.domofond.ru/city-ratings/stavropol-c2129",
+
+"Горячий Ключ": "https://www.domofond.ru/city-ratings/goryachiy_klyuch-c817",
+
+"Нальчик": "https://www.domofond.ru/city-ratings/nalchik-c477",
+
+"Мытищи": "https://www.domofond.ru/city-ratings/mytischi-c3439",
+
+"Набережные Челны": "https://www.domofond.ru/city-ratings/naberezhnye_chelny-c1334",
+
+"Долгопрудный": "https://www.domofond.ru/city-ratings/dolgoprudnyy-c3523",
+
+"Северск": "https://www.domofond.ru/city-ratings/seversk-c1924",
+
+"Калининград": "https://www.domofond.ru/city-ratings/kaliningrad-c2919",
+
+"Королев": "https://www.domofond.ru/city-ratings/korolev-c3594",
+
+"Абакан": "https://www.domofond.ru/city-ratings/abakan-c1216",
+
+"Обнинск": "https://www.domofond.ru/city-ratings/obninsk-c435",
+
+"Ханты-Мансийск": "https://www.domofond.ru/city-ratings/hanty_mansiysk-c2288",
+
+"Армавир": "https://www.domofond.ru/city-ratings/armavir-c928",
+
+"Тихорецк": "https://www.domofond.ru/city-ratings/tihoretsk-c806",
+
+"Саранск": "https://www.domofond.ru/city-ratings/saransk-c1196",
+
+"Краснодар": "https://www.domofond.ru/city-ratings/krasnodar-c900",
+
+"Ступино": "https://www.domofond.ru/city-ratings/stupino-c3484",
+
+"Муром": "https://www.domofond.ru/city-ratings/murom-c231",
+
+"Нижнекамск": "https://www.domofond.ru/city-ratings/nizhnekamsk-c1344",
+
+"Евпатория": "https://www.domofond.ru/city-ratings/evpatoriya-c3620",
+
+"Санкт-Петербург": "https://www.domofond.ru/city-ratings/sankt_peterburg-c3414",
+
+"Железногорск": "https://www.domofond.ru/city-ratings/zheleznogorsk-c3115",
+
+"Владимир": "https://www.domofond.ru/city-ratings/vladimir-c232",
+
+"Чебоксары": "https://www.domofond.ru/city-ratings/cheboksary-c2754",
+
+"Новочебоксарск": "https://www.domofond.ru/city-ratings/novocheboksarsk-c2755",
+
+"Химки": "https://www.domofond.ru/city-ratings/himki-c3490",
+
+"Бердск": "https://www.domofond.ru/city-ratings/berdsk-c3279",
+
+"Альметьевск": "https://www.domofond.ru/city-ratings/almetevsk-c1338",
+
+"Чехов": "https://www.domofond.ru/city-ratings/chehov-c3424",
+
+"Ивантеевка": "https://www.domofond.ru/city-ratings/ivanteevka-c3425",
+
+"Глазов": "https://www.domofond.ru/city-ratings/glazov-c1998",
+
+"Реутов": "https://www.domofond.ru/city-ratings/reutov-c3467",
+
+"Северодвинск": "https://www.domofond.ru/city-ratings/severodvinsk-c2961",
+
+"Белгород": "https://www.domofond.ru/city-ratings/belgorod-c310",
+
+"Туймазы": "https://www.domofond.ru/city-ratings/tuymazy-c1593",
+
+"Казань": "https://www.domofond.ru/city-ratings/kazan-c1330",
+
+"Аксай": "https://www.domofond.ru/city-ratings/aksay-c1753",
+
+"Чайковский": "https://www.domofond.ru/city-ratings/chaykovskiy-c1620",
+
+"Ижевск": "https://www.domofond.ru/city-ratings/izhevsk-c2017",
+
+"Верхняя Пышма": "https://www.domofond.ru/city-ratings/verhnyaya_pyshma-c2590",
+
+"Йошкар-Ола": "https://www.domofond.ru/city-ratings/yoshkar_ola-c31",
+
+"Красногорск": "https://www.domofond.ru/city-ratings/krasnogorsk-c3444",
+
+"Губкин": "https://www.domofond.ru/city-ratings/gubkin-c281",
+
+"Ессентуки": "https://www.domofond.ru/city-ratings/essentuki-c2136",
+
+"Благовещенск": "https://www.domofond.ru/city-ratings/blagoveschensk-c3036",
+
+"Тобольск": "https://www.domofond.ru/city-ratings/tobolsk-c2521",
+
+"Кудрово": "https://www.domofond.ru/city-ratings/kudrovo-c3658",
+
+"Лиски": "https://www.domofond.ru/city-ratings/liski-c3045",
+
+"Новый Уренгой": "https://www.domofond.ru/city-ratings/novyy_urengoy-c105",
+
+"Барнаул": "https://www.domofond.ru/city-ratings/barnaul-c2886",
+
+"Калуга": "https://www.domofond.ru/city-ratings/kaluga-c430",
+
+"Новороссийск": "https://www.domofond.ru/city-ratings/novorossiysk-c927",
+
+"Видное": "https://www.domofond.ru/city-ratings/vidnoe-c3544",
+
+"Миасс": "https://www.domofond.ru/city-ratings/miass-c2354",
+
+"Севастополь": "https://www.domofond.ru/city-ratings/sevastopol-c3634",
+
+"Владикавказ": "https://www.domofond.ru/city-ratings/vladikavkaz-c1505",
+
+"Дмитров": "https://www.domofond.ru/city-ratings/dmitrov-c3501",
+
+"Череповец": "https://www.domofond.ru/city-ratings/cherepovets-c346",
+
+"Пенза": "https://www.domofond.ru/city-ratings/penza-c1449",
+
+"Одинцово": "https://www.domofond.ru/city-ratings/odintsovo-c3529",
+
+"Екатеринбург": "https://www.domofond.ru/city-ratings/ekaterinburg-c2653",
+
+"Стерлитамак": "https://www.domofond.ru/city-ratings/sterlitamak-c1588",
+
+"Оренбург": "https://www.domofond.ru/city-ratings/orenburg-c98",
+
+"Раменское": "https://www.domofond.ru/city-ratings/ramenskoe-c3494",
+
+"Кисловодск": "https://www.domofond.ru/city-ratings/kislovodsk-c2112",
+
+"Тольятти": "https://www.domofond.ru/city-ratings/tolyatti-c2409",
+
+"Горно-Алтайск": "https://www.domofond.ru/city-ratings/gorno_altaysk-c2724",
+
+"Пермь": "https://www.domofond.ru/city-ratings/perm-c1667",
+
+"Коломна": "https://www.domofond.ru/city-ratings/kolomna-c3565",
+
+"Мурманск": "https://www.domofond.ru/city-ratings/murmansk-c1131",
+
+"Томск": "https://www.domofond.ru/city-ratings/tomsk-c1942",
+
+"Нефтекамск": "https://www.domofond.ru/city-ratings/neftekamsk-c1590",
+
+"Соликамск": "https://www.domofond.ru/city-ratings/solikamsk-c1640",
+
+"Новосибирск": "https://www.domofond.ru/city-ratings/novosibirsk-c3285",
+
+"Уфа": "https://www.domofond.ru/city-ratings/ufa-c1514",
+
+"Петрозаводск": "https://www.domofond.ru/city-ratings/petrozavodsk-c1238",
+
+"Всеволожск": "https://www.domofond.ru/city-ratings/vsevolozhsk-c3380",
+
+"Пятигорск": "https://www.domofond.ru/city-ratings/pyatigorsk-c2138",
+
+"Ноябрьск": "https://www.domofond.ru/city-ratings/noyabrsk-c113",
+
+"Димитровград": "https://www.domofond.ru/city-ratings/dimitrovgrad-c2179",
+
+"Киров": "https://www.domofond.ru/city-ratings/kirov-c1028",
+
+"Тула": "https://www.domofond.ru/city-ratings/tula-c2466",
+
+"Воронеж": "https://www.domofond.ru/city-ratings/voronezh-c3098",
+
+"Наро-Фоминск": "https://www.domofond.ru/city-ratings/naro_fominsk-c3442",
+
+"Нефтеюганск": "https://www.domofond.ru/city-ratings/nefteyugansk-c2273",
+
+"Иркутск": "https://www.domofond.ru/city-ratings/irkutsk-c532",
+
+"Жуковский": "https://www.domofond.ru/city-ratings/zhukovskiy-c3564",
+
+"Кострома": "https://www.domofond.ru/city-ratings/kostroma-c696",
+
+"Вологда": "https://www.domofond.ru/city-ratings/vologda-c344",
+
+"Хабаровск": "https://www.domofond.ru/city-ratings/habarovsk-c2217",
+
+"Гатчина": "https://www.domofond.ru/city-ratings/gatchina-c3405",
+
+"Нижний Новгород": "https://www.domofond.ru/city-ratings/nizhniy_novgorod-c1023",
+
+"Бор": "https://www.domofond.ru/city-ratings/bor-c969",
+
+"Михайловск": "https://www.domofond.ru/city-ratings/mihaylovsk-c2139",
+
+"Ангарск": "https://www.domofond.ru/city-ratings/angarsk-c534",
+
+"Красноярск": "https://www.domofond.ru/city-ratings/krasnoyarsk-c3174",
+
+"Салават": "https://www.domofond.ru/city-ratings/salavat-c1584",
+
+"Ульяновск": "https://www.domofond.ru/city-ratings/ulyanovsk-c2181",
+
+"Каменск-Уральский": "https://www.domofond.ru/city-ratings/kamensk_uralskiy-c2602",
+
+"Тверь": "https://www.domofond.ru/city-ratings/tver-c1980",
+
+"Кемерово": "https://www.domofond.ru/city-ratings/kemerovo-c3008",
+
+"Туапсе": "https://www.domofond.ru/city-ratings/tuapse-c904",
+
+"Великий Новгород": "https://www.domofond.ru/city-ratings/velikiy_novgorod-c642",
+
+"Невинномысск": "https://www.domofond.ru/city-ratings/nevinnomyssk-c2130",
+
+"Новоуральск": "https://www.domofond.ru/city-ratings/novouralsk-c2647",
+
+"Псков": "https://www.domofond.ru/city-ratings/pskov-c1474",
+
+"Азов": "https://www.domofond.ru/city-ratings/azov-c1751",
+
+"Щёлково": "https://www.domofond.ru/city-ratings/schelkovo-c3528",
+
+"Бугульма": "https://www.domofond.ru/city-ratings/bugulma-c1301",
+
+"Курск": "https://www.domofond.ru/city-ratings/kursk-c1165",
+
+"Феодосия": "https://www.domofond.ru/city-ratings/feodosiya-c3640",
+
+"Иваново": "https://www.domofond.ru/city-ratings/ivanovo-c567",
+
+"Лобня": "https://www.domofond.ru/city-ratings/lobnya-c3532",
+
+"Старый Оскол": "https://www.domofond.ru/city-ratings/staryy_oskol-c314",
+
+"Волгодонск": "https://www.domofond.ru/city-ratings/volgodonsk-c1750",
+
+"Тамбов": "https://www.domofond.ru/city-ratings/tambov-c2502",
+
+"Ухта": "https://www.domofond.ru/city-ratings/uhta-c3218",
+
+"Люберцы": "https://www.domofond.ru/city-ratings/lyubertsy-c3524",
+
+"Серпухов": "https://www.domofond.ru/city-ratings/serpuhov-c3522",
+
+"Самара": "https://www.domofond.ru/city-ratings/samara-c2415",
+
+"Орел": "https://www.domofond.ru/city-ratings/orel-c1896",
+
+"Симферополь": "https://www.domofond.ru/city-ratings/simferopol-c3610",
+
+"Котлас": "https://www.domofond.ru/city-ratings/kotlas-c2928",
+
+"Балашиха": "https://www.domofond.ru/city-ratings/balashiha-c3575",
+
+"Сыктывкар": "https://www.domofond.ru/city-ratings/syktyvkar-c3234",
+
+"Кстово": "https://www.domofond.ru/city-ratings/kstovo-c980",
+
+"Мурино": "https://www.domofond.ru/city-ratings/murino-c3409",
+
+"Орехово-Зуево": "https://www.domofond.ru/city-ratings/orehovo_zuevo-c3473",
+
+"Павловский Посад": "https://www.domofond.ru/city-ratings/pavlovskiy_posad-c3549",
+
+"Бийск": "https://www.domofond.ru/city-ratings/biysk-c2891",
+
+"Мичуринск": "https://www.domofond.ru/city-ratings/michurinsk-c2494",
+
+"Магнитогорск": "https://www.domofond.ru/city-ratings/magnitogorsk-c2293",
+
+"Смоленск": "https://www.domofond.ru/city-ratings/smolensk-c2248",
+
+"Батайск": "https://www.domofond.ru/city-ratings/bataysk-c1754",
+
+"Липецк": "https://www.domofond.ru/city-ratings/lipetsk-c1103",
+
+"Подольск": "https://www.domofond.ru/city-ratings/podolsk-c3483",
+
+"Рязань": "https://www.domofond.ru/city-ratings/ryazan-c2718",
+
+"Ярославль": "https://www.domofond.ru/city-ratings/yaroslavl-c197",
+
+"Егорьевск": "https://www.domofond.ru/city-ratings/egorevsk-c3548",
+
+"Ялта": "https://www.domofond.ru/city-ratings/yalta-c3645",
+
+"Ковров": "https://www.domofond.ru/city-ratings/kovrov-c209",
+
+"Бузулук": "https://www.domofond.ru/city-ratings/buzuluk-c93",
+
+"Волжский": "https://www.domofond.ru/city-ratings/volzhskiy-c350",
+
+"Керчь": "https://www.domofond.ru/city-ratings/kerch-c3624",
+
+"Владивосток": "https://www.domofond.ru/city-ratings/vladivostok-c1888",
+
+"Ростов-на-Дону": "https://www.domofond.ru/city-ratings/rostov_na_donu-c1759",
+
+"Рыбинск": "https://www.domofond.ru/city-ratings/rybinsk-c196",
+
+"Энгельс": "https://www.domofond.ru/city-ratings/engels-c3310",
+
+"Белогорск": "https://www.domofond.ru/city-ratings/belogorsk-c3020",
+
+"Дзержинск": "https://www.domofond.ru/city-ratings/dzerzhinsk-c1016",
+
+"Нерюнгри": "https://www.domofond.ru/city-ratings/neryungri-c1268",
+
+"Березники": "https://www.domofond.ru/city-ratings/berezniki-c1658",
+
+"Железнодорожный": "https://www.domofond.ru/city-ratings/zheleznodorozhnyy-c3559",
+
+"Арзамас": "https://www.domofond.ru/city-ratings/arzamas-c1019",
+
+"Воткинск": "https://www.domofond.ru/city-ratings/votkinsk-c1992",
+
+"Улан-Удэ": "https://www.domofond.ru/city-ratings/ulan_ude-c264",
+
+"Минеральные Воды": "https://www.domofond.ru/city-ratings/mineralnye_vody-c2149",
+
+"Курган": "https://www.domofond.ru/city-ratings/kurgan-c673",
+
+"Брянск": "https://www.domofond.ru/city-ratings/bryansk-c2798",
+
+"Братск": "https://www.domofond.ru/city-ratings/bratsk-c495",
+
+"Нижний Тагил": "https://www.domofond.ru/city-ratings/nizhniy_tagil-c2646",
+
+"Черкесск": "https://www.domofond.ru/city-ratings/cherkessk-c619",
+
+"Выборг": "https://www.domofond.ru/city-ratings/vyborg-c3325",
+
+"Лабинск": "https://www.domofond.ru/city-ratings/labinsk-c777",
+
+"Гусь-Хрустальный": "https://www.domofond.ru/city-ratings/gus_hrustalnyy-c203",
+
+"Россошь": "https://www.domofond.ru/city-ratings/rossosh-c3073",
+
+"Новоалтайск": "https://www.domofond.ru/city-ratings/novoaltaysk-c2851",
+
+"Кирово-Чепецк": "https://www.domofond.ru/city-ratings/kirovo_chepetsk-c1056",
+
+"Камышин": "https://www.domofond.ru/city-ratings/kamyshin-c358",
+
+"Вольск": "https://www.domofond.ru/city-ratings/volsk-c3304",
+
+"Великие Луки": "https://www.domofond.ru/city-ratings/velikie_luki-c1466",
+
+"Биробиджан": "https://www.domofond.ru/city-ratings/birobidzhan-c2813",
+
+"Кинешма": "https://www.domofond.ru/city-ratings/kineshma-c561",
+
+"Петропавловск-Камчатский": "https://www.domofond.ru/city-ratings/petropavlovsk_kamchatskiy-c2",
+
+"Новокузнецк": "https://www.domofond.ru/city-ratings/novokuznetsk-c3013",
+
+"Таганрог": "https://www.domofond.ru/city-ratings/taganrog-c1764",
+
+"Усолье-Сибирское": "https://www.domofond.ru/city-ratings/usole_sibirskoe-c489",
+
+"Сергиев Посад": "https://www.domofond.ru/city-ratings/sergiev_posad-c3480",
+
+"Печора": "https://www.domofond.ru/city-ratings/pechora-c3212",
+
+"Балаково": "https://www.domofond.ru/city-ratings/balakovo-c3312",
+
+"Омск": "https://www.domofond.ru/city-ratings/omsk-c1406",
+
+"Александров": "https://www.domofond.ru/city-ratings/aleksandrov-c204",
+
+"Магадан": "https://www.domofond.ru/city-ratings/magadan-c931",
+
+"Новокуйбышевск": "https://www.domofond.ru/city-ratings/novokuybyshevsk-c2413",
+
+"Сызрань": "https://www.domofond.ru/city-ratings/syzran-c2407",
+
+"Сарапул": "https://www.domofond.ru/city-ratings/sarapul-c2003",
+
+"Новомосковск": "https://www.domofond.ru/city-ratings/novomoskovsk-c2462",
+
+"Кропоткин": "https://www.domofond.ru/city-ratings/kropotkin-c849",
+
+"Ногинск": "https://www.domofond.ru/city-ratings/noginsk-c3589",
+
+"Челябинск": "https://www.domofond.ru/city-ratings/chelyabinsk-c2358",
+
+"Элиста": "https://www.domofond.ru/city-ratings/elista-c271",
+
+"Электросталь": "https://www.domofond.ru/city-ratings/elektrostal-c3453",
+
+"Чита": "https://www.domofond.ru/city-ratings/chita-c171",
+
+"Елец": "https://www.domofond.ru/city-ratings/elets-c1094",
+
+"Саратов": "https://www.domofond.ru/city-ratings/saratov-c3311",
+
+"Канск": "https://www.domofond.ru/city-ratings/kansk-c3164",
+
+"Пушкино": "https://www.domofond.ru/city-ratings/pushkino-c3459",
+
+"Златоуст": "https://www.domofond.ru/city-ratings/zlatoust-c2353",
+
+"Первоуральск": "https://www.domofond.ru/city-ratings/pervouralsk-c2649",
+
+"Махачкала": "https://www.domofond.ru/city-ratings/mahachkala-c1827",
+
+"Шадринск": "https://www.domofond.ru/city-ratings/shadrinsk-c662",
+
+"Ачинск": "https://www.domofond.ru/city-ratings/achinsk-c3161",
+
+"Вязьма": "https://www.domofond.ru/city-ratings/vyazma-c2226",
+
+"Каспийск": "https://www.domofond.ru/city-ratings/kaspiysk-c1829",
+
+"Волгоград": "https://www.domofond.ru/city-ratings/volgograd-c400",
+
+"Архангельск": "https://www.domofond.ru/city-ratings/arhangelsk-c2964",
+
+"Прокопьевск": "https://www.domofond.ru/city-ratings/prokopevsk-c3016",
+
+"Орск": "https://www.domofond.ru/city-ratings/orsk-c65",
+
+"Серов": "https://www.domofond.ru/city-ratings/serov-c2610",
+
+"Солнечногорск": "https://www.domofond.ru/city-ratings/solnechnogorsk-c3510",
+
+"Комсомольск-на-Амуре": "https://www.domofond.ru/city-ratings/komsomolsk_na_amure-c2206",
+
+"Воскресенск": "https://www.domofond.ru/city-ratings/voskresensk-c3590",
+
+"Копейск": "https://www.domofond.ru/city-ratings/kopeysk-c2328",
+
+"Новошахтинск": "https://www.domofond.ru/city-ratings/novoshahtinsk-c1735",
+
+"Астрахань": "https://www.domofond.ru/city-ratings/astrahan-c596",
+
+"Клин": "https://www.domofond.ru/city-ratings/klin-c3608",
+
+"Воркута": "https://www.domofond.ru/city-ratings/vorkuta-c3236",
+
+"Рубцовск": "https://www.domofond.ru/city-ratings/rubtsovsk-c2879",
+
+"Норильск": "https://www.domofond.ru/city-ratings/norilsk-c3122",
+
+"Находка": "https://www.domofond.ru/city-ratings/nahodka-c1835",
+
+"Киселевск": "https://www.domofond.ru/city-ratings/kiselevsk-c3009",
+
+"Вышний Волочек": "https://www.domofond.ru/city-ratings/vyshniy_volochek-c1950",
+
+"Ленинск-Кузнецкий": "https://www.domofond.ru/city-ratings/leninsk_kuznetskiy-c2982",
+
+"Каменск-Шахтинский": "https://www.domofond.ru/city-ratings/kamensk_shahtinskiy-c1702",
+
+"Белово": "https://www.domofond.ru/city-ratings/belovo-c2972",
+
+"Якутск": "https://www.domofond.ru/city-ratings/yakutsk-c1251",
+
+"Рославль": "https://www.domofond.ru/city-ratings/roslavl-c2234",
+
+"Новочеркасск": "https://www.domofond.ru/city-ratings/novocherkassk-c1762",
+
+"Шахты": "https://www.domofond.ru/city-ratings/shahty-c1765",
+
+"Волоколамск": "https://www.domofond.ru/city-ratings/volokolamsk-c3515",
+
+"Свободный": "https://www.domofond.ru/city-ratings/svobodnyy-c3022"
+}
