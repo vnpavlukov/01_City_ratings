@@ -4,6 +4,7 @@ import json
 import datetime
 import requests
 from bs4 import BeautifulSoup
+from time import sleep
 
 HOST = 'https://www.domofond.ru'
 URL = 'https://www.domofond.ru/city-ratings'
@@ -21,9 +22,19 @@ def write_all_data(data, name):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 
+def add_data_if_exist(head, *parts):
+    for part in parts:
+        try:
+            head = head[part]
+        except:
+            return None
+    return head
+
+
 def scrap_all_data(html_text):
     date_time = datetime.datetime.today().strftime("%d.%m_%H")
-    file_name = os.path.join('data', f"database_{date_time}_hours.json")
+    file_name = os.path.join('data', f"database_22.08_17_hours.json")
+    # file_name = os.path.join('data', f"database_{date_time}_hours.json")
 
     if not os.path.isfile(file_name):
         print('Start scraping all cities names and URLs...')
@@ -38,16 +49,16 @@ def scrap_all_data(html_text):
                                  'statistic-table__td1___30ZsU').get_text()
             city_url = HOST + city_url.get('data-url')
             database[city_name] = {'url': city_url}
-        print('All cities names and URLs write into file database.json')
+        print('All cities names and URLs written into:', file_name)
         write_all_data(database, file_name)
     else:
-        print('All cities names and URLs already into file database.json')
+        print('All cities names and URLs already into:', file_name)
 
     with open(file_name, encoding="utf8") as file:
         database = json.load(file)
 
     n_cities = len(database)  # number_of_cities
-    n_city = 0  # number_of_city
+    n_city = 0  # city number
     print('Start scraping', n_cities, 'city(-ies)', '\n')
 
     for city_name, city_data in database.items():
@@ -58,26 +69,39 @@ def scrap_all_data(html_text):
         if 'Ecology' in city_data:
             print('URLs data', city_name, 'is already in the database')
         else:
-            print('Start scraping URL data', city_name)
+
+            print(f'Start scraping URL data {city_name}...')
             first_keys = ['Ecology', 'Purity', 'Utilities sector', 'Neighbors',
                           'Conditions for children', 'Sports and recreation',
                           'The shops', 'Transport', 'Security', 'Cost of living']
             first_values = list()
-            response = requests.get(city_data['url'], headers=HEADERS)
+
+            while True:
+                try:
+                    response = requests.get(city_data['url'], headers=HEADERS)
+                    break
+                except:
+                    print("\n*****ConnectionError or TimeoutError*****\n\n"
+                          "I will retry again after 7 second...")
+                    sleep(7)
+                    print('Making another request:')
+
             soup = BeautifulSoup(response.text, 'html.parser')
             ratings = soup.find_all('div', class_="area-rating__score___3ERQc")
             for rating in ratings:
                 first_values.append(rating.text)
             first_data = dict(zip(first_keys, first_values))
+            print('Status code:', response.status_code)
             print('first_data:', first_data)
             city_data.update(first_data)
             write_all_data(database, file_name)
+            sleep(1)
 
         # CURL REQUEST
         if 'avgScalePrice' in city_data:
             print('CURLs data', city_name, 'is already in the database\n')
         else:
-            print('Start scraping CURL data', city_name)
+            print(f'Start scraping CURL data {city_name}...')
             headers = {'authority': 'api.domofond.ru',
                        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
                        'content-type': 'text/plain', 'accept': '*/*',
@@ -89,20 +113,21 @@ def scrap_all_data(html_text):
             city_id = re.findall(r'\w+$', city_data['url'])[0][1:]
             data = '{"id":"1","jsonrpc":"2.0","method":"priceanalysis.GetAreaPricesV1","params":{"meta":{"platform":"web","language":"ru"},"areaID":' \
                    + city_id + ',"areaType":"City"}}'
-            response = requests.post(
-                'https://api.domofond.ru/rpc', headers=headers, data=data)
+
+            while True:
+                try:
+                    response = requests.post(
+                        'https://api.domofond.ru/rpc', headers=headers,
+                        data=data)
+                    break
+                except:
+                    print("ConnectionError or TimeoutError\n"
+                          "I will retry again after 7 second...")
+                    sleep(7)
+                    print('Making another request...')
+
             parsing_data = json.loads(response.text)
-
             second_data = dict()
-
-            def add_data_if_exist(head, *parts):
-                for part in parts:
-                    try:
-                        head = head[part]
-                    except:
-                        return None
-                return head
-
             second_data['avgScalePrice'] = \
                 add_data_if_exist(parsing_data, 'result', 'sale',
                                   'priceAnalysisAverage', 'averagePrice')
@@ -139,15 +164,27 @@ def scrap_all_data(html_text):
             print('second_data:', second_data, '\n')
             city_data.update(second_data)
             write_all_data(database, file_name)
+            sleep(1)
 
 
 def all_rating_data(url):
-    try:
-        html = requests.get(url, headers=HEADERS)
-        print('status code:', html.status_code)
-        scrap_all_data(html.text)
-    except TimeoutError:
-        print('TimeoutError')
+    while True:
+        try:
+            html = requests.get(url, headers=HEADERS)
+            break
+        except ConnectionError or TimeoutError:
+            print("\n*****ConnectionError or TimeoutError*****\n\n"
+                  "I will retry again after 7 second...")
+            sleep(7)
+            print('Making another request...')
+        except:
+            print('Some problems with connection...')
+            sleep(7)
+            print('Making another request...')
+
+    print('Status code:', html.status_code)
+    scrap_all_data(html.text)
+    sleep(1)
 
 
 def main():
