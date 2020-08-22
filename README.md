@@ -1,2 +1,3 @@
 # 01_City_ratings
- scraping City ratings from Domfond.ru
+My first big project on scraping
+I`ll be scraping city ratings from Domfond.ru
