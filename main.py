@@ -5,6 +5,7 @@ import datetime
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
+from json_to_xlsx import json_to_xlsx
 
 HOST = 'https://www.domofond.ru'
 URL = 'https://www.domofond.ru/city-ratings'
@@ -32,9 +33,9 @@ def add_data_if_exist(head, *parts):
 
 
 def scrap_all_data(html_text):
-    date_time = datetime.datetime.today().strftime("%d.%m_%H")
-    file_name = os.path.join('data', f"database_22.08_17_hours.json")
+    # date_time = datetime.datetime.today().strftime("%d.%m_%H")
     # file_name = os.path.join('data', f"database_{date_time}_hours.json")
+    file_name = os.path.join('data', f"database_22.08_17_hours.json")
 
     if not os.path.isfile(file_name):
         print('Start scraping all cities names and URLs...')
@@ -190,6 +191,8 @@ def all_rating_data(url):
 def main():
     print('Program is start working...')
     all_rating_data(URL)
+    print('Scrapping is finished')
+    json_to_xlsx()
 
 
 if __name__ == '__main__':
