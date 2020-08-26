@@ -1,4 +1,5 @@
 import os
+import json
 import pandas
 
 
@@ -23,6 +24,11 @@ def json_to_xlsx():
         elif is_convert == 'n':
             print('Have a nice day')
             break
+
+
+def update_data_in_file(data, name):
+    with open(name, 'w', encoding='utf8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
 
 
 if __name__ == '__main__':
