@@ -33,9 +33,9 @@ def add_data_if_exist(head, *parts):
 
 
 def scrap_all_data(html_text):
-    # date_time = datetime.datetime.today().strftime("%d.%m_%H")
-    # file_name = os.path.join('data', f"database_{date_time}_hours.json")
-    file_name = os.path.join('data', f"database_22.08_17_hours.json")
+    date_time = datetime.datetime.today().strftime("%d.%m_%H")
+    file_name = os.path.join('data', f"database_{date_time}_hours.json")
+    # file_name = os.path.join('data', f"database_22.08_17_hours.json")
 
     if not os.path.isfile(file_name):
         print('Start scraping all cities names and URLs...')
@@ -79,24 +79,27 @@ def scrap_all_data(html_text):
 
             while True:
                 try:
-                    response = requests.get(city_data['url'], headers=HEADERS)
-                    break
+                    response = requests.get(city_data['url'],
+                                            headers=HEADERS)
+                    soup = BeautifulSoup(response.text, 'html.parser')
+                    ratings = soup.find_all('div',
+                                            class_="area-rating__score___3ERQc")
+                    for rating in ratings:
+                        first_values.append(rating.text)
+                    if not first_values:
+                        continue
+                    else:
+                        first_data = dict(zip(first_keys, first_values))
+                        print('first_data:', first_data)
+                        city_data.update(first_data)
+                        write_all_data(database, file_name)
+                        sleep(1)
+                        break
                 except:
                     print("\n*****ConnectionError or TimeoutError*****\n\n"
                           "I will retry again after 7 second...")
                     sleep(7)
                     print('Making another request:')
-
-            soup = BeautifulSoup(response.text, 'html.parser')
-            ratings = soup.find_all('div', class_="area-rating__score___3ERQc")
-            for rating in ratings:
-                first_values.append(rating.text)
-            first_data = dict(zip(first_keys, first_values))
-            print('Status code:', response.status_code)
-            print('first_data:', first_data)
-            city_data.update(first_data)
-            write_all_data(database, file_name)
-            sleep(1)
 
         # CURL REQUEST
         if 'avgScalePrice' in city_data:
@@ -190,8 +193,12 @@ def all_rating_data(url):
 
 def main():
     print('Program is start working...')
+    start_time = datetime.datetime.today()
     all_rating_data(URL)
-    print('Scrapping is finished')
+    end_time = datetime.datetime.today()
+    delta = end_time - start_time
+    print(f'Scrapping is completed within {delta.seconds // 60} minutes'
+          f' and {delta.seconds % 60} seconds')
     json_to_xlsx()
 
 
