@@ -26,7 +26,7 @@ def json_to_xlsx():
             break
 
 
-def update_data_in_file(data, name):
+def write_data_in_file(data, name):
     with open(name, 'w', encoding='utf8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 

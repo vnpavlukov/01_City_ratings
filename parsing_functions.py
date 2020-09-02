@@ -1,3 +1,4 @@
+import os
 import re
 import json
 import requests
@@ -10,32 +11,33 @@ def parse_cities_names_and_urls(html_text):
     soup = BeautifulSoup(html_text, 'html.parser')
     all_cities_urls = soup.find_all('tr',
                                     class_='statistic-table__tr___3O1oy')
-    database = dict()
+    cities_data = dict()
     for city_url in all_cities_urls:
         city_name = city_url.find(
             'td', class_='statistic-table__td___2SXmY '
                          'statistic-table__td1___30ZsU').get_text()
         city_url = 'https://www.domofond.ru' + city_url.get('data-url')
-        database[city_name] = {'url': city_url}
+        cities_data[city_name] = {'url': city_url}
     print('Scraping all cities names and URLs is finished...')
-    return database
+    return cities_data
 
 
-def get_rating_from_url_request(file_name):
+def get_rating_from_response(file_name):
     with open(file_name, encoding="utf8") as file:
-        database = json.load(file)
+        cities_data = json.load(file)
 
-    number_of_cities = len(database)
+    number_of_cities = len(cities_data)
     city_number = 0
     print('Start scraping with URL REQUESTS', number_of_cities, 'city(-ies)\n')
 
-    for city_name, city_data in database.items():
+    for city_name, city_data in cities_data.items():
         city_number += 1
         print(str(city_number) + '/' + str(number_of_cities),
               city_name, city_data['url'])
 
+
         if 'Ecology' in city_data:
-            print(f'URLs data {city_name}, is already in the database')
+            print(f'URLs data {city_name}, is already in the cities_data')
         else:
             print(f'Start scraping URL data {city_name}...')
             rating_keys = ['Ecology', 'Purity', 'Utilities sector', 'Neighbors',
@@ -65,7 +67,7 @@ def get_rating_from_url_request(file_name):
                         for rating in ratings:
                             rating_values.append(rating.text)
                         rating_data = dict(zip(rating_keys, rating_values))
-                        print('rating_data:', rating_data)
+                        print('rating_data:', rating_data, '\n')
                         city_data.update(rating_data)
                         sleep(1)
                         break
@@ -74,10 +76,10 @@ def get_rating_from_url_request(file_name):
                           "I will retry again after 7 seconds...")
                     sleep(7)
                     print('Making another request...')
-    return database
+    return cities_data
 
 
-def get_rating_from_curl_request(file_name):
+def get_prices_from_response(file_name):
     with open(file_name, encoding="utf8") as file:
         database = json.load(file)
 
@@ -167,7 +169,7 @@ def get_rating_from_curl_request(file_name):
     return database
 
 
-def html_to_html_text(url):
+def html_response(url):
     HEADERS = {'authority': 'www.domofond.ru', 'cache-control': 'max-age=0',
                'upgrade-insecure-requests': '1',
                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
