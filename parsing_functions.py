@@ -29,7 +29,7 @@ API_HEADERS = {'authority': 'www.domofond.ru',
                'sec-fetch-user': '?1',
                'sec-fetch-dest': 'document',
                'accept-language': 'en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7'}
-API_URL = {'https://api.domofond.ru/rpc'}
+API_URL = 'https://api.domofond.ru/rpc'
 
 
 def html_response(url, headers, request_method='get', data=None):
@@ -67,13 +67,15 @@ def parse_cities_names_and_urls(html_text):
     return cities_data
 
 
-def get_rating_from_response(file_name):
+def get_city_data_from_json_file(file_name):
     with open(file_name, encoding="utf8") as file:
-        cities_data = json.load(file)
+        return json.load(file)
 
+
+def get_rating_from_response(cities_data):
     number_of_cities = len(cities_data)
     city_number = 0
-    print('Start scraping with URL REQUESTS', number_of_cities, 'city(-ies)\n')
+    print('Start scraping ratings', number_of_cities, 'city(-ies)\n')
 
     for city_name, city_data in cities_data.items():
         city_number += 1
@@ -81,9 +83,9 @@ def get_rating_from_response(file_name):
               city_name, city_data['url'])
 
         if 'Ecology' in city_data:
-            print(f'URLs data {city_name}, is already in the cities_data')
+            print(f'Ratings data {city_name}, is already in the cities_data')
         else:
-            print(f'Start scraping URL data {city_name}...')
+            print(f'Start scraping {city_name} ratings ...')
             rating_keys = ['Ecology', 'Purity', 'Utilities sector', 'Neighbors',
                            'Conditions for children', 'Sports and recreation',
                            'The shops', 'Transport', 'Security',
@@ -107,22 +109,19 @@ def get_rating_from_response(file_name):
     return cities_data
 
 
-def get_prices_from_response(file_name):
-    with open(file_name, encoding="utf8") as file:
-        cities_data = json.load(file)
-
+def get_prices_from_response(cities_data):
     number_of_cities = len(cities_data)
     city_number = 0
-    print('Start scraping with CURL REQUESTS', number_of_cities, 'city(-ies)\n')
+    print('Start scraping prices', number_of_cities, 'city(-ies)\n')
 
     for city_name, city_data in cities_data.items():
         city_number += 1
         print(str(city_number) + '/' + str(number_of_cities), city_name,
               city_data['url'])
         if 'avgScalePrice' in city_data:
-            print('CURLs data', city_name, 'is already in the cities_data\n')
+            print('Prices data', city_name, 'is already in the cities_data\n')
         else:
-            print(f'Start scraping CURL data {city_name}...')
+            print(f'Start scraping {city_name} prices...')
 
             city_id = re.findall(r'\w+$', city_data['url'])[0][1:]
             data = '{"id":"1","jsonrpc":"2.0","method":"priceanalysis.GetAre' \
