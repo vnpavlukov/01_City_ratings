@@ -12,19 +12,18 @@ def scrap_all_data(url):
 
     if not os.path.isfile(file_name):
         html_text = html_response(url, WEB_HEADERS)
-        all_cities_names_and_urls = parse_cities_names_and_urls(html_text)
-        write_data_in_file(all_cities_names_and_urls, file_name)
+        cities_names_and_urls = parse_cities_names_and_urls(html_text)
+        write_data_in_file(cities_names_and_urls, file_name)
         print('All cities names and URLs written into:', file_name)
     else:
         print('All cities names and URLs already into:', file_name)
 
-    all_cities_names_and_urls = get_city_data_from_json_file(file_name)
-    cities_rating = get_rating_from_response(all_cities_names_and_urls)
-    write_data_in_file(cities_rating, file_name)
+    cities_names_and_urls = get_city_data_from_json_file(file_name)
+    data_with_cities_rating = scrap_rating_if_not_exist(cities_names_and_urls)
+    write_data_in_file(data_with_cities_rating, file_name)
 
-    all_cities_data = get_city_data_from_json_file(file_name)
-    cities_prices = get_prices_from_response(all_cities_data)
-    write_data_in_file(cities_prices, file_name)
+    data_with_cities_prices = scrap_prices_if_not_exist(data_with_cities_rating)
+    write_data_in_file(data_with_cities_prices, file_name)
 
 
 def main():

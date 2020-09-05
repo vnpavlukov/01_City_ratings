@@ -36,11 +36,11 @@ def html_response(url, headers, request_method='get', data=None):
     for _ in range(3):
         try:
             if request_method == 'get':
-                html = requests.get(url, headers=headers)
-                return html.text
+                response = requests.get(url, headers=headers)
+                return response.text
             elif request_method == 'post':
-                html = requests.post(url, headers=headers, data=data)
-                return html.text
+                response = requests.post(url, headers=headers, data=data)
+                return response.text
             else:
                 raise Exception('You must enter post or get method')
 
@@ -72,7 +72,30 @@ def get_city_data_from_json_file(file_name):
         return json.load(file)
 
 
-def get_rating_from_response(cities_data):
+def update_rating_with_html_response(city_name, city_data):
+    print(f'Start scraping {city_name} ratings ...')
+    rating_keys = ['Ecology', 'Purity', 'Utilities sector', 'Neighbors',
+                   'Conditions for children', 'Sports and recreation',
+                   'The shops', 'Transport', 'Security',
+                   'Cost of living']
+    rating_values = list()
+
+    for _ in range(3):
+        prices_response = html_response(city_data['url'], WEB_HEADERS)
+        soup = BeautifulSoup(prices_response, 'html.parser')
+        ratings = soup.find_all('div',
+                                class_="area-rating__score___3ERQc")
+        if ratings:  # page has parsed, but there is no data
+            for rating in ratings:
+                rating_values.append(rating.text)
+            rating_data = dict(zip(rating_keys, rating_values))
+            print('rating_data:', rating_data, '\n')
+            city_data.update(rating_data)
+            sleep(1)
+            break
+
+
+def scrap_rating_if_not_exist(cities_data):
     number_of_cities = len(cities_data)
     city_number = 0
     print('Start scraping ratings', number_of_cities, 'city(-ies)\n')
@@ -85,31 +108,70 @@ def get_rating_from_response(cities_data):
         if 'Ecology' in city_data:
             print(f'Ratings data {city_name}, is already in the cities_data')
         else:
-            print(f'Start scraping {city_name} ratings ...')
-            rating_keys = ['Ecology', 'Purity', 'Utilities sector', 'Neighbors',
-                           'Conditions for children', 'Sports and recreation',
-                           'The shops', 'Transport', 'Security',
-                           'Cost of living']
-            rating_values = list()
-
-            for _ in range(3):
-                prices_response = html_response(city_data['url'],
-                                                WEB_HEADERS)
-                soup = BeautifulSoup(prices_response, 'html.parser')
-                ratings = soup.find_all('div',
-                                        class_="area-rating__score___3ERQc")
-                if ratings:  # page has parsed, but there is no data
-                    for rating in ratings:
-                        rating_values.append(rating.text)
-                    rating_data = dict(zip(rating_keys, rating_values))
-                    print('rating_data:', rating_data, '\n')
-                    city_data.update(rating_data)
-                    sleep(1)
-                    break
+            update_rating_with_html_response(city_name, city_data)
     return cities_data
 
 
-def get_prices_from_response(cities_data):
+def return_data_if_exist(head, *parts):
+    for part in parts:
+        try:
+            head = head[part]
+        except TypeError:
+            return None
+    return head
+
+
+def update_prices_with_html_response(city_name, city_data):
+    print(f'Start scraping {city_name} prices...')
+
+    city_id = re.findall(r'\w+$', city_data['url'])[0][1:]
+    data = '{"id":"1","jsonrpc":"2.0","method":"priceanalysis.GetAre' \
+           'aPricesV1","params":{"meta":{"platform":"web","language":' \
+           '"ru"},"areaID":' + city_id + ',"areaType":"City"}}'
+
+    json_response = html_response(API_URL, API_HEADERS, 'post', data)
+    parsing_data = json.loads(json_response)
+    prices_data = dict()
+
+    prices_data['avgScalePrice'] = \
+        return_data_if_exist(parsing_data, 'result', 'sale',
+                             'priceAnalysisAverage', 'averagePrice')
+    prices_data['avgSalePricePerM2'] = \
+        return_data_if_exist(parsing_data, 'result', 'sale',
+                             'priceAnalysisAverage', 'averagePricePerM2')
+    prices_data['avgSalePrice1Bedroom'] = \
+        return_data_if_exist(parsing_data, 'result', 'sale',
+                             'priceAnalysisAverage', 'avgPrice1Bedroom')
+    prices_data['avgSalePrice2Bedroom'] = \
+        return_data_if_exist(parsing_data, 'result', 'sale',
+                             'priceAnalysisAverage', 'avgPrice2Bedroom')
+    prices_data['avgSalePrice3Bedroom'] = \
+        return_data_if_exist(parsing_data, 'result', 'sale',
+                             'priceAnalysisAverage', 'avgPrice3Bedroom')
+    prices_data['avgSalePrice4Bedroom'] = \
+        return_data_if_exist(parsing_data, 'result', 'sale',
+                             'priceAnalysisAverage', 'avgPrice4Bedroom')
+    prices_data['avgRentPrice'] = \
+        return_data_if_exist(parsing_data, 'result', 'rent',
+                             'priceAnalysisAverage', 'averagePrice')
+    prices_data['avgRentPricePerM2'] = \
+        return_data_if_exist(parsing_data, 'result', 'rent',
+                             'priceAnalysisAverage', 'averagePricePerM2')
+    prices_data['avgRentPrice1Bedroom'] = \
+        return_data_if_exist(parsing_data, 'result', 'rent',
+                             'priceAnalysisAverage', 'avgPrice1Bedroom')
+    prices_data['avgRentPrice2Bedroom'] = \
+        return_data_if_exist(parsing_data, 'result', 'rent',
+                             'priceAnalysisAverage', 'avgPrice1Bedroom')
+    prices_data['avgRentPrice3Bedroom'] = \
+        return_data_if_exist(parsing_data, 'result', 'rent',
+                             'priceAnalysisAverage', 'avgPrice1Bedroom')
+    print('prices_data:', prices_data, '\n')
+    city_data.update(prices_data)
+    sleep(1)
+
+
+def scrap_prices_if_not_exist(cities_data):
     number_of_cities = len(cities_data)
     city_number = 0
     print('Start scraping prices', number_of_cities, 'city(-ies)\n')
@@ -121,59 +183,5 @@ def get_prices_from_response(cities_data):
         if 'avgScalePrice' in city_data:
             print('Prices data', city_name, 'is already in the cities_data\n')
         else:
-            print(f'Start scraping {city_name} prices...')
-
-            city_id = re.findall(r'\w+$', city_data['url'])[0][1:]
-            data = '{"id":"1","jsonrpc":"2.0","method":"priceanalysis.GetAre' \
-                   'aPricesV1","params":{"meta":{"platform":"web","language":' \
-                   '"ru"},"areaID":' + city_id + ',"areaType":"City"}}'
-
-            json_response = html_response(API_URL, API_HEADERS, 'post', data)
-            parsing_data = json.loads(json_response)
-            prices_data = dict()
-
-            def return_data_if_exist(head, *parts):
-                for part in parts:
-                    try:
-                        head = head[part]
-                    except TypeError:
-                        return None
-                return head
-
-            prices_data['avgScalePrice'] = \
-                return_data_if_exist(parsing_data, 'result', 'sale',
-                                     'priceAnalysisAverage', 'averagePrice')
-            prices_data['avgSalePricePerM2'] = \
-                return_data_if_exist(parsing_data, 'result', 'sale',
-                                     'priceAnalysisAverage', 'averagePricePerM2')
-            prices_data['avgSalePrice1Bedroom'] = \
-                return_data_if_exist(parsing_data, 'result', 'sale',
-                                     'priceAnalysisAverage', 'avgPrice1Bedroom')
-            prices_data['avgSalePrice2Bedroom'] = \
-                return_data_if_exist(parsing_data, 'result', 'sale',
-                                     'priceAnalysisAverage', 'avgPrice2Bedroom')
-            prices_data['avgSalePrice3Bedroom'] = \
-                return_data_if_exist(parsing_data, 'result', 'sale',
-                                     'priceAnalysisAverage', 'avgPrice3Bedroom')
-            prices_data['avgSalePrice4Bedroom'] = \
-                return_data_if_exist(parsing_data, 'result', 'sale',
-                                     'priceAnalysisAverage', 'avgPrice4Bedroom')
-            prices_data['avgRentPrice'] = \
-                return_data_if_exist(parsing_data, 'result', 'rent',
-                                     'priceAnalysisAverage', 'averagePrice')
-            prices_data['avgRentPricePerM2'] = \
-                return_data_if_exist(parsing_data, 'result', 'rent',
-                                     'priceAnalysisAverage', 'averagePricePerM2')
-            prices_data['avgRentPrice1Bedroom'] = \
-                return_data_if_exist(parsing_data, 'result', 'rent',
-                                     'priceAnalysisAverage', 'avgPrice1Bedroom')
-            prices_data['avgRentPrice2Bedroom'] = \
-                return_data_if_exist(parsing_data, 'result', 'rent',
-                                     'priceAnalysisAverage', 'avgPrice1Bedroom')
-            prices_data['avgRentPrice3Bedroom'] = \
-                return_data_if_exist(parsing_data, 'result', 'rent',
-                                     'priceAnalysisAverage', 'avgPrice1Bedroom')
-            print('prices_data:', prices_data, '\n')
-            city_data.update(prices_data)
-            sleep(1)
+            update_prices_with_html_response(city_name, city_data)
     return cities_data
