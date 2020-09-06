@@ -136,7 +136,7 @@ def update_prices_with_html_response(city_name, city_data):
     sleep(1)
 
 
-def scrap_data_if_there_are_none(cities_data, value_key):
+def scrap_data_if_there_are_none(cities_data, type_of_data):
     number_of_cities = len(cities_data)
     city_number = 0
     print('Start scraping data', number_of_cities, 'city(-ies)\n')
@@ -145,8 +145,14 @@ def scrap_data_if_there_are_none(cities_data, value_key):
         city_number += 1
         print(str(city_number) + '/' + str(number_of_cities), city_name,
               city_data['url'])
-        if value_key in city_data:
-            print('Cities data', city_name, 'is already in the cities_data\n')
-        else:
-            update_rating_with_html_response(city_name, city_data)
+        if type_of_data == 'rating':
+            if 'Ecology' in city_data:
+                print('Cities rating', city_name, 'is already in the cities_data\n')
+            else:
+                update_rating_with_html_response(city_name, city_data)
+        elif type_of_data == 'prices':
+            if 'avgScalePrice' in city_data:
+                print('Cities prices', city_name, 'is already in the cities_data\n')
+            else:
+                update_prices_with_html_response(city_name, city_data)
     return cities_data

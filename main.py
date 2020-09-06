@@ -18,11 +18,11 @@ def scrap_all_data_and_write_into_file(url):
 
     cities_names_and_urls = get_city_data_from_json_file(file_name)
     data_with_cities_rating = \
-        scrap_data_if_there_are_none(cities_names_and_urls, 'Ecology')
+        scrap_data_if_there_are_none(cities_names_and_urls, 'rating')
     write_data_in_file(data_with_cities_rating, file_name)
 
     data_with_cities_prices = \
-        scrap_data_if_there_are_none(data_with_cities_rating, 'avgScalePrice')
+        scrap_data_if_there_are_none(data_with_cities_rating, 'prices')
     write_data_in_file(data_with_cities_prices, file_name)
 
 
