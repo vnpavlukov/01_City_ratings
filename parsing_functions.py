@@ -44,9 +44,9 @@ def html_response(url, headers, request_method='get', data=None):
             else:
                 raise Exception('You must enter post or get method')
 
-        except ConnectionError or TimeoutError:
-            print("\n*****ConnectionError or TimeoutError*****\n\n"
-                  "I will retry again after 7 seconds...")
+        except ConnectionError or TimeoutError or ConnectionResetError:
+            print("\n*****ConnectionError, TimeoutError or ConnectionResetError*"
+                  "****\n\nI will retry again after 7 seconds...")
             sleep(7)
             print('Making another request...')
 
