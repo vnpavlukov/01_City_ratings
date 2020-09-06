@@ -95,15 +95,6 @@ def update_rating_with_html_response(city_name, city_data):
             break
 
 
-def return_data_if_exist(head, *parts):
-    for part in parts:
-        try:
-            head = head[part]
-        except TypeError:
-            return None
-    return head
-
-
 def update_prices_with_html_response(city_name, city_data):
     print(f'Start scraping {city_name} prices...')
 
@@ -116,39 +107,30 @@ def update_prices_with_html_response(city_name, city_data):
     parsing_data = json.loads(json_response)
     prices_data = dict()
 
-    prices_data['avgScalePrice'] = \
-        return_data_if_exist(parsing_data, 'result', 'sale',
-                             'priceAnalysisAverage', 'averagePrice')
-    prices_data['avgSalePricePerM2'] = \
-        return_data_if_exist(parsing_data, 'result', 'sale',
-                             'priceAnalysisAverage', 'averagePricePerM2')
-    prices_data['avgSalePrice1Bedroom'] = \
-        return_data_if_exist(parsing_data, 'result', 'sale',
-                             'priceAnalysisAverage', 'avgPrice1Bedroom')
-    prices_data['avgSalePrice2Bedroom'] = \
-        return_data_if_exist(parsing_data, 'result', 'sale',
-                             'priceAnalysisAverage', 'avgPrice2Bedroom')
-    prices_data['avgSalePrice3Bedroom'] = \
-        return_data_if_exist(parsing_data, 'result', 'sale',
-                             'priceAnalysisAverage', 'avgPrice3Bedroom')
-    prices_data['avgSalePrice4Bedroom'] = \
-        return_data_if_exist(parsing_data, 'result', 'sale',
-                             'priceAnalysisAverage', 'avgPrice4Bedroom')
-    prices_data['avgRentPrice'] = \
-        return_data_if_exist(parsing_data, 'result', 'rent',
-                             'priceAnalysisAverage', 'averagePrice')
-    prices_data['avgRentPricePerM2'] = \
-        return_data_if_exist(parsing_data, 'result', 'rent',
-                             'priceAnalysisAverage', 'averagePricePerM2')
-    prices_data['avgRentPrice1Bedroom'] = \
-        return_data_if_exist(parsing_data, 'result', 'rent',
-                             'priceAnalysisAverage', 'avgPrice1Bedroom')
-    prices_data['avgRentPrice2Bedroom'] = \
-        return_data_if_exist(parsing_data, 'result', 'rent',
-                             'priceAnalysisAverage', 'avgPrice1Bedroom')
-    prices_data['avgRentPrice3Bedroom'] = \
-        return_data_if_exist(parsing_data, 'result', 'rent',
-                             'priceAnalysisAverage', 'avgPrice1Bedroom')
+    sale_prices = parsing_data.get('result', {}).get('sale', {}).get(
+        'priceAnalysisAverage', {})
+    prices_data['avgScalePrice'] = sale_prices.get('averagePrice', None)
+    prices_data['avgSalePricePerM2'] = sale_prices.get('averagePricePerM2', None)
+    prices_data['avgSalePrice1Bedroom'] = sale_prices.get(
+        'avgPrice1Bedroom', None)
+    prices_data['avgSalePrice2Bedroom'] = sale_prices.get(
+        'avgPrice2Bedroom', None)
+    prices_data['avgSalePrice3Bedroom'] = sale_prices.get(
+        'avgPrice3Bedroom', None)
+    prices_data['avgSalePrice4Bedroom'] = sale_prices.get(
+        'avgPrice4Bedroom', None)
+
+    rent_prices = parsing_data.get('result', {}).get('rent', {}).get(
+        'priceAnalysisAverage', {})
+    prices_data['avgRentPrice'] = rent_prices.get('averagePrice', None)
+    prices_data['avgRentPricePerM2'] = rent_prices.get('averagePricePerM2', None)
+    prices_data['avgRentPrice1Bedroom'] = rent_prices.get(
+        'avgPrice1Bedroom', None)
+    prices_data['avgRentPrice2Bedroom'] = rent_prices.get(
+        'avgPrice2Bedroom', None)
+    prices_data['avgRentPrice3Bedroom'] = rent_prices.get(
+        'avgPrice3Bedroom', None)
+
     print('prices_data:', prices_data, '\n')
     city_data.update(prices_data)
     sleep(1)
