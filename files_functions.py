@@ -1,6 +1,12 @@
 import os
 import json
 import pandas
+import datetime
+
+
+def file_name_path_data_name_d_m_h():
+    now_day_month_hour = datetime.datetime.today().strftime("%d.%m_%H")
+    return os.path.join('data', f"data_cities_{now_day_month_hour}.00.json")
 
 
 def json_to_xlsx():
