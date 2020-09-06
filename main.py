@@ -19,10 +19,12 @@ def scrap_all_data(url):
         print('All cities names and URLs already into:', file_name)
 
     cities_names_and_urls = get_city_data_from_json_file(file_name)
-    data_with_cities_rating = scrap_rating_if_not_exist(cities_names_and_urls)
+    data_with_cities_rating = \
+        scrap_data_if_there_are_none(cities_names_and_urls, 'Ecology')
     write_data_in_file(data_with_cities_rating, file_name)
 
-    data_with_cities_prices = scrap_prices_if_not_exist(data_with_cities_rating)
+    data_with_cities_prices = \
+        scrap_data_if_there_are_none(data_with_cities_rating, 'avgScalePrice')
     write_data_in_file(data_with_cities_prices, file_name)
 
 

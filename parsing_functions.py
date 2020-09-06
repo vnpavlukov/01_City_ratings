@@ -95,23 +95,6 @@ def update_rating_with_html_response(city_name, city_data):
             break
 
 
-def scrap_rating_if_not_exist(cities_data):
-    number_of_cities = len(cities_data)
-    city_number = 0
-    print('Start scraping ratings', number_of_cities, 'city(-ies)\n')
-
-    for city_name, city_data in cities_data.items():
-        city_number += 1
-        print(str(city_number) + '/' + str(number_of_cities),
-              city_name, city_data['url'])
-
-        if 'Ecology' in city_data:
-            print(f'Ratings data {city_name}, is already in the cities_data')
-        else:
-            update_rating_with_html_response(city_name, city_data)
-    return cities_data
-
-
 def return_data_if_exist(head, *parts):
     for part in parts:
         try:
@@ -171,17 +154,17 @@ def update_prices_with_html_response(city_name, city_data):
     sleep(1)
 
 
-def scrap_prices_if_not_exist(cities_data):
+def scrap_data_if_there_are_none(cities_data, value_key):
     number_of_cities = len(cities_data)
     city_number = 0
-    print('Start scraping prices', number_of_cities, 'city(-ies)\n')
+    print('Start scraping data', number_of_cities, 'city(-ies)\n')
 
     for city_name, city_data in cities_data.items():
         city_number += 1
         print(str(city_number) + '/' + str(number_of_cities), city_name,
               city_data['url'])
-        if 'avgScalePrice' in city_data:
-            print('Prices data', city_name, 'is already in the cities_data\n')
+        if value_key in city_data:
+            print('Cities data', city_name, 'is already in the cities_data\n')
         else:
-            update_prices_with_html_response(city_name, city_data)
+            update_rating_with_html_response(city_name, city_data)
     return cities_data
