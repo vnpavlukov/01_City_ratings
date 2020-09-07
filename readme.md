@@ -1,7 +1,7 @@
 # 01_City_ratings
-My first project on scraping
-I`ll be scraping city ratings from Domfond.ru
 
-
-tasks:
-1. find out why URL requests sometimes return the empty data
+1. Download all city names and urls from
+https://www.domofond.ru/city-ratings
+2. Create json file and write all names and urls in this file
+3. go through all urls and scrap all cities ratings and apartment prices
+4. save all data in xls file
