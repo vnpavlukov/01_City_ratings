@@ -72,68 +72,27 @@ def get_city_data_from_json_file(file_name):
         return json.load(file)
 
 
-def update_rating_with_html_response(city_name, city_data):
-    print(f'Start scraping {city_name} ratings ...')
-    rating_keys = ['Ecology', 'Purity', 'Utilities sector', 'Neighbors',
-                   'Conditions for children', 'Sports and recreation',
-                   'The shops', 'Transport', 'Security',
-                   'Cost of living']
-    rating_values = list()
-
+def rating_values_from_html(url):
     for _ in range(3):
-        prices_response = html_response(city_data['url'], WEB_HEADERS)
+        prices_response = html_response(url, WEB_HEADERS)
         soup = BeautifulSoup(prices_response, 'html.parser')
         ratings = soup.find_all('div',
                                 class_="area-rating__score___3ERQc")
-        if ratings:  # page has parsed, but there is no data
+        rating_values = list()
+        if ratings:
             for rating in ratings:
                 rating_values.append(rating.text)
-            rating_data = dict(zip(rating_keys, rating_values))
-            print('rating_data:', rating_data, '\n')
-            city_data.update(rating_data)
-            sleep(1)
-            break
+            return rating_values
+    raise Exception('Some problems with connection')
 
 
-def update_prices_with_html_response(city_name, city_data):
-    print(f'Start scraping {city_name} prices...')
-
-    city_id = re.findall(r'\w+$', city_data['url'])[0][1:]
+def prices_in_json_from_html(url):
+    city_id = re.findall(r'\w+$', url)[0][1:]
     data = '{"id":"1","jsonrpc":"2.0","method":"priceanalysis.GetAre' \
            'aPricesV1","params":{"meta":{"platform":"web","language":' \
            '"ru"},"areaID":' + city_id + ',"areaType":"City"}}'
-
     json_response = html_response(API_URL, API_HEADERS, 'post', data)
-    parsing_data = json.loads(json_response)
-    prices_data = dict()
-
-    sale_prices = parsing_data.get('result', {}).get('sale', {}).get(
-        'priceAnalysisAverage', {})
-    prices_data['avgScalePrice'] = sale_prices.get('averagePrice', None)
-    prices_data['avgSalePricePerM2'] = sale_prices.get('averagePricePerM2', None)
-    prices_data['avgSalePrice1Bedroom'] = sale_prices.get(
-        'avgPrice1Bedroom', None)
-    prices_data['avgSalePrice2Bedroom'] = sale_prices.get(
-        'avgPrice2Bedroom', None)
-    prices_data['avgSalePrice3Bedroom'] = sale_prices.get(
-        'avgPrice3Bedroom', None)
-    prices_data['avgSalePrice4Bedroom'] = sale_prices.get(
-        'avgPrice4Bedroom', None)
-
-    rent_prices = parsing_data.get('result', {}).get('rent', {}).get(
-        'priceAnalysisAverage', {})
-    prices_data['avgRentPrice'] = rent_prices.get('averagePrice', None)
-    prices_data['avgRentPricePerM2'] = rent_prices.get('averagePricePerM2', None)
-    prices_data['avgRentPrice1Bedroom'] = rent_prices.get(
-        'avgPrice1Bedroom', None)
-    prices_data['avgRentPrice2Bedroom'] = rent_prices.get(
-        'avgPrice2Bedroom', None)
-    prices_data['avgRentPrice3Bedroom'] = rent_prices.get(
-        'avgPrice3Bedroom', None)
-
-    print('prices_data:', prices_data, '\n')
-    city_data.update(prices_data)
-    sleep(1)
+    return json.loads(json_response)
 
 
 def scrap_data_if_there_are_none(cities_data, type_of_data):
@@ -147,12 +106,57 @@ def scrap_data_if_there_are_none(cities_data, type_of_data):
               city_data['url'])
         if type_of_data == 'rating':
             if 'Ecology' in city_data:
-                print('Cities rating', city_name, 'is already in the cities_data\n')
+                print('Cities rating', city_name,
+                      'is already in the cities_data\n')
             else:
-                update_rating_with_html_response(city_name, city_data)
+                rating_values = rating_values_from_html(city_data['url'])
+                rating_keys = ['Ecology', 'Purity', 'Utilities sector',
+                               'Neighbors',
+                               'Conditions for children',
+                               'Sports and recreation',
+                               'The shops', 'Transport', 'Security',
+                               'Cost of living']
+                rating_data = dict(zip(rating_keys, rating_values))
+                print('rating_data:', rating_data, '\n')
+                city_data.update(rating_data)
+
+
         elif type_of_data == 'prices':
             if 'avgScalePrice' in city_data:
-                print('Cities prices', city_name, 'is already in the cities_data\n')
+                print('Cities prices', city_name,
+                      'is already in the cities_data\n')
             else:
-                update_prices_with_html_response(city_name, city_data)
+                prices_data = dict()
+                prices_values = prices_in_json_from_html(city_data['url'])
+                sale_prices = prices_values.get('result', {}). \
+                    get('sale', {}).get('priceAnalysisAverage', {})
+                prices_data['avgScalePrice'] = sale_prices.get(
+                    'averagePrice', None)
+                prices_data['avgSalePricePerM2'] = sale_prices.get(
+                    'averagePricePerM2', None)
+                prices_data['avgSalePrice1Bedroom'] = sale_prices.get(
+                    'avgPrice1Bedroom', None)
+                prices_data['avgSalePrice2Bedroom'] = sale_prices.get(
+                    'avgPrice2Bedroom', None)
+                prices_data['avgSalePrice3Bedroom'] = sale_prices.get(
+                    'avgPrice3Bedroom', None)
+                prices_data['avgSalePrice4Bedroom'] = sale_prices.get(
+                    'avgPrice4Bedroom', None)
+
+                rent_prices = prices_values.get('result', {}).get('rent', {}). \
+                    get('priceAnalysisAverage', {})
+                prices_data['avgRentPrice'] = rent_prices.get(
+                    'averagePrice', None)
+                prices_data['avgRentPricePerM2'] = rent_prices.get(
+                    'averagePricePerM2', None)
+                prices_data['avgRentPrice1Bedroom'] = rent_prices.get(
+                    'avgPrice1Bedroom', None)
+                prices_data['avgRentPrice2Bedroom'] = rent_prices.get(
+                    'avgPrice2Bedroom', None)
+                prices_data['avgRentPrice3Bedroom'] = rent_prices.get(
+                    'avgPrice3Bedroom', None)
+
+                print('prices_data:', prices_data, '\n')
+                city_data.update(prices_data)
+
     return cities_data
