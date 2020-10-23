@@ -95,56 +95,50 @@ def prices_in_json_from_html(url):
     return json.loads(json_response)
 
 
-def parse_city_rating(city_name, city_data):
-    if 'Ecology' in city_data:
-        print('City rating', city_name, 'is already in the cities_data\n')
-    else:
-        rating_values = rating_values_from_html(city_data['url'])
-        rating_keys = ['Ecology', 'Purity', 'Utilities sector',
-                       'Neighbors',
-                       'Conditions for children',
-                       'Sports and recreation',
-                       'The shops', 'Transport', 'Security',
-                       'Cost of living']
-        rating_data = dict(zip(rating_keys, rating_values))
-        print('rating_data:\n', rating_data)
-        return rating_data
+def parse_city_rating(city_data):
+    rating_values = rating_values_from_html(city_data['url'])
+    rating_keys = ['Ecology', 'Purity', 'Utilities sector',
+                   'Neighbors',
+                   'Conditions for children',
+                   'Sports and recreation',
+                   'The shops', 'Transport', 'Security',
+                   'Cost of living']
+    rating_data = dict(zip(rating_keys, rating_values))
+    print('rating_data:\n', rating_data)
+    return rating_data
 
 
-def parse_city_prices(city_name, city_data):
-    if 'avgScalePrice' in city_data:
-        print('City prices', city_name, 'is already in the cities_data\n')
-    else:
-        prices_data = dict()
-        prices_values = prices_in_json_from_html(city_data['url'])
-        sale_prices = prices_values.get('result', {}). \
-            get('sale', {}).get('priceAnalysisAverage', {})
+def parse_city_prices(city_data):
+    prices_data = dict()
+    prices_values = prices_in_json_from_html(city_data['url'])
+    sale_prices = prices_values.get('result', {}). \
+        get('sale', {}).get('priceAnalysisAverage', {})
 
-        prices_data['avgScalePrice'] = sale_prices.get(
-            'averagePrice', None)
-        prices_data['avgSalePricePerM2'] = sale_prices.get(
-            'averagePricePerM2', None)
-        prices_data['avgSalePrice1Bedroom'] = sale_prices.get(
-            'avgPrice1Bedroom', None)
-        prices_data['avgSalePrice2Bedroom'] = sale_prices.get(
-            'avgPrice2Bedroom', None)
-        prices_data['avgSalePrice3Bedroom'] = sale_prices.get(
-            'avgPrice3Bedroom', None)
-        prices_data['avgSalePrice4Bedroom'] = sale_prices.get(
-            'avgPrice4Bedroom', None)
+    prices_data['avgScalePrice'] = sale_prices.get(
+        'averagePrice', None)
+    prices_data['avgSalePricePerM2'] = sale_prices.get(
+        'averagePricePerM2', None)
+    prices_data['avgSalePrice1Bedroom'] = sale_prices.get(
+        'avgPrice1Bedroom', None)
+    prices_data['avgSalePrice2Bedroom'] = sale_prices.get(
+        'avgPrice2Bedroom', None)
+    prices_data['avgSalePrice3Bedroom'] = sale_prices.get(
+        'avgPrice3Bedroom', None)
+    prices_data['avgSalePrice4Bedroom'] = sale_prices.get(
+        'avgPrice4Bedroom', None)
 
-        rent_prices = prices_values.get('result', {}).get('rent', {}). \
-            get('priceAnalysisAverage', {})
-        prices_data['avgRentPrice'] = rent_prices.get(
-            'averagePrice', None)
-        prices_data['avgRentPricePerM2'] = rent_prices.get(
-            'averagePricePerM2', None)
-        prices_data['avgRentPrice1Bedroom'] = rent_prices.get(
-            'avgPrice1Bedroom', None)
-        prices_data['avgRentPrice2Bedroom'] = rent_prices.get(
-            'avgPrice2Bedroom', None)
-        prices_data['avgRentPrice3Bedroom'] = rent_prices.get(
-            'avgPrice3Bedroom', None)
+    rent_prices = prices_values.get('result', {}).get('rent', {}). \
+        get('priceAnalysisAverage', {})
+    prices_data['avgRentPrice'] = rent_prices.get(
+        'averagePrice', None)
+    prices_data['avgRentPricePerM2'] = rent_prices.get(
+        'averagePricePerM2', None)
+    prices_data['avgRentPrice1Bedroom'] = rent_prices.get(
+        'avgPrice1Bedroom', None)
+    prices_data['avgRentPrice2Bedroom'] = rent_prices.get(
+        'avgPrice2Bedroom', None)
+    prices_data['avgRentPrice3Bedroom'] = rent_prices.get(
+        'avgPrice3Bedroom', None)
 
-        print('prices_data:\n', prices_data, '\n')
-        return prices_data
+    print('prices_data:\n', prices_data, '\n')
+    return prices_data

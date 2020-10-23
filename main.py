@@ -11,7 +11,7 @@ def main():
     start_time = datetime.datetime.today()
 
     if os.path.isfile(file_name):
-        print('All cities names and URLs already into:', file_name)
+        print('All cities names and URLs is already into:', file_name)
         cities_names_and_urls = get_city_data_from_json_file(file_name)
     else:
         html_text = html_response(PAGE_WITH_ALL_CITIES, WEB_HEADERS)
@@ -28,11 +28,17 @@ def main():
         city_url = city_data['url']
         print(f'{city_number}/{number_of_cities} {city_name} {city_url}')
 
-        city_rating = parse_city_rating(city_name, city_data)
-        city_data.update(city_rating)
+        if 'Ecology' in city_data:
+            print('City rating', city_name, 'is already in the cities_data')
+        else:
+            city_rating = parse_city_rating(city_data)
+            city_data.update(city_rating)
 
-        city_prices = parse_city_prices(city_name, city_data)
-        city_data.update(city_prices)
+        if 'avgScalePrice' in city_data:
+            print('City prices', city_name, 'is already in the cities_data\n')
+        else:
+            city_prices = parse_city_prices(city_data)
+            city_data.update(city_prices)
 
         write_data_in_file(cities_names_and_urls, file_name)
 
